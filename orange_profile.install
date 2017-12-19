@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install, update & uninstall functions for orange_profile.
+ * Install, update and uninstall functions for the drupalorange_profile installation profile.
  */
 
 use Drupal\user\Entity\User;
@@ -17,7 +17,7 @@ use Drupal\menu_link_content\Entity\MenuLinkContent;
  *
  * @see system_install()
  */
-function orange_profile_install() {
+function drupalorange_profile_install() {
   // First, do everything in standard profile.
   include_once DRUPAL_ROOT . '/core/profiles/standard/standard.install';
   standard_install();
@@ -181,6 +181,7 @@ function orange_profile_install() {
     'menu_name' => 'footer',
     'expanded' => FALSE,
     'weight' => 0,
+    'enabled' => FALSE,
   ]);
   $menu_link_footer_contact_us->save();
 
@@ -233,8 +234,4 @@ function orange_profile_install() {
     'weight' => 1,
   ]);
   $menu_link_social_twitter->save();
-
-  // Disable the contact link in the footer menu.
-  $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
-  $menu_link_manager->updateDefinition('contact.site_page', array('enabled' => FALSE));
 }
